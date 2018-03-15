@@ -1,0 +1,95 @@
+html {
+  height: 100vh;
+}
+body, div#wrapper, div#maincontent {
+  min-height: 100vh;
+}
+
+div#sidebarleft {
+  border-style: solid;
+  border-width: 5px;
+  border-color: black;
+  background-color: cyan;
+
+  height: 100%;
+  width: 300px;
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  left: 0;
+
+  /* margin-left: -200px; */
+}
+
+div#sidebarright {
+  border-style: solid;
+  border-width: 5px;
+  border-color: black;
+
+  height: 100%;
+  width: 300px;
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  right: 0;
+}
+
+div#maincontent {
+  /* width: 100%; */
+  background-color: palegreen;
+}
+
+div#wrapper {
+  background-color: olive;
+  padding-left: 300px;
+  padding-right: 300px;
+  min-height: 100%;
+}
+
+div.container1 {
+  background-color: red;
+  min-height: 100vh;
+}
+
+div.sidebarpaper {
+  background-color: gray;
+  border-style: solid;
+  border-width: 0;
+  border-bottom-width: 5px;
+  border-color: black; 
+}
+
+div#sidebaraddpaper {
+  position: fixed;
+  z-index: 2;
+  bottom: 0;
+  left: 0;
+  width: inherit;
+  height: 50px;
+  background-color: chartreuse;
+}
+
+div#filepicker-outer {
+  position: fixed;
+  z-index: 3;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 100px;
+}
+
+div#filepicker-inner {
+  /* margin: 100px; */
+  width: 100%;
+  height: 100%;
+  background-color: darkorchid;
+  overflow: scroll;
+}
+
+div#filepicker-close {
+  position: fixed;
+  z-index: 4;
+  top: 110px;
+  right: 110px;
+}
