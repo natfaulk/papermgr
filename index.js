@@ -1,87 +1,61 @@
-const express = require('express')
-const fs = require('fs-extra')
-const path = require('path')
-
-const PORT = 3000
-const PAPER_FOLDER = '/Users/nathanielfaulkner/OneDrive/Documents/phd/litReview/papers'
-
-const app = express()
-
-app.use('/static', express.static(path.join(__dirname, 'statics')))
-app.use('/json', express.static(path.join(__dirname, 'savefiles')))
-
-app.use(express.json());       // to support JSON-encoded bodies
-app.use(express.urlencoded({extended: false})); // to support URL-encoded bodies
-
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'templates', 'index.html'))
-})
-
-app.get('/dispPapers', (req, res) => {
-  let out = {'files': []}
-
-  res.setHeader('Content-Type', 'application/json')
-
-  fs.readdir(PAPER_FOLDER, (err, files) => {
-    files.forEach(file => {
-      out.files.push(file)
-    })
-    
-    res.send(JSON.stringify(out))
-  })
-})
-
-app.post('/dispFilePath', (req, res) => {
-  let currentDir = req.body.dir_path
-  if (currentDir === 'none') currentDir = __dirname
-  let out = {'dirs': [], 'files': [], 'currDir': currentDir}
-
-  res.setHeader('Content-Type', 'application/json')
-
-
-  fs.readdir(currentDir, (err, files) => {
-    files.forEach(file => {
-      if (fs.lstatSync(path.join(currentDir, file)).isDirectory()) out.dirs.push(file)
-      if (fs.lstatSync(path.join(currentDir, file)).isFile()) out.files.push(file)
-    })
-    
-    res.send(JSON.stringify(out))
-  })
-})
-
-app.post('/addPaper', (req, res) => {
-  let paperPath = req.body.paper_path
-  let paperName = req.body.paper_name
-  fs.copy(path.join(paperPath, paperName), path.join(__dirname, 'statics', paperName), (err) => {
-    if (err) throw err
-
-    fs.readFile(path.join(__dirname, 'savefiles', 'papers.json'), 'utf8', function (err, data) {
-      if (err) throw err // we'll not consider error handling for now
-      let sav = JSON.parse(data)
-      let tempPaper = {'title': 'dummy title', 'path': 'static/' + paperName, 'notes': 'dummy notes'}
-      sav.push(tempPaper)
-
-      let out = JSON.stringify(sav)
-
-      fs.writeFile(path.join(__dirname, 'savefiles', 'papers.json'), out, 'utf8', function (err) {
-        if (err) throw err
-        res.send('ack')
-      })
-    })
-  })
-})
-
-app.listen(PORT, () => console.log(`Began listening on port ${PORT}`))
-
-// let PDFParser = require('pdf2json')
-
-// let pdfParser = new PDFParser()
-
-// pdfParser.on("pdfParser_dataError", errData => console.error(errData.parserError) )
-// pdfParser.on("pdfParser_dataReady", pdfData => {
-//   fs.writeFile("test.json", JSON.stringify(pdfData))
-
+const {app, BrowserWindow} = require('electron')
+  const path = require('path')
+  const url = require('url')
   
-// })
-
-// pdfParser.loadPDF("test.pdf")
+  // Keep a global reference of the window object, if you don't, the window will
+  // be closed automatically when the JavaScript object is garbage collected.
+  let win
+  
+  function createWindow () {
+    // Create the browser window.
+    win = new BrowserWindow({
+      width: 1200,
+      height: 800,
+      webPreferences: {
+        plugins: true
+      }
+    })
+  
+    // and load the index.html of the app.
+    win.loadURL(url.format({
+      pathname: path.join(__dirname, 'templates', 'index.html'),
+      protocol: 'file:',
+      slashes: true
+    }))
+  
+    // Open the DevTools.
+    win.webContents.openDevTools()
+  
+    // Emitted when the window is closed.
+    win.on('closed', () => {
+      // Dereference the window object, usually you would store windows
+      // in an array if your app supports multi windows, this is the time
+      // when you should delete the corresponding element.
+      win = null
+    })
+  }
+  
+  // This method will be called when Electron has finished
+  // initialization and is ready to create browser windows.
+  // Some APIs can only be used after this event occurs.
+  app.on('ready', createWindow)
+  
+  // Quit when all windows are closed.
+  app.on('window-all-closed', () => {
+    // On macOS it is common for applications and their menu bar
+    // to stay active until the user quits explicitly with Cmd + Q
+    if (process.platform !== 'darwin') {
+      app.quit()
+    }
+  })
+  
+  app.on('activate', () => {
+    // On macOS it's common to re-create a window in the app when the
+    // dock icon is clicked and there are no other windows open.
+    if (win === null) {
+      createWindow()
+    }
+  })
+  
+  // In this file you can include the rest of your app's specific main process
+  // code. You can also put them in separate files and require them here.

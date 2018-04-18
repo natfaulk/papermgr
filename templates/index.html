@@ -9,7 +9,7 @@
 
     <!-- Bootstrap -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <link href="static/css/index.css" rel="stylesheet">
+    <link href="../statics/css/index.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -24,17 +24,16 @@
       <div id="sidebarleft">
         <h1>Papers:</h1>
         <div ng-repeat="paper in papers track by $index" class="sidebarpaper" ng-click="sidebar($index)">{{paper.title}}</div>
-        <div id="sidebaraddpaper" ng-click="showFilePicker()">
+        <!-- <div id="sidebaraddpaper" ng-click="showFilePicker()">
           Add paper
-          <!-- <input type="file" id="fileLoader" name="files" title="Load File" /> -->
-        </div>
+          <input type="file" id="fileLoader" name="files" title="Load File" />
+        </div> -->
       </div>
       <div id="maincontent">
         <div class="container1">
           <h1>{{papers[currentPaper].title}}</h1>
           <br />
-          <!-- <div id="pdfviewer"></div> -->
-          <embed id="pdfviewer" src="" width= "100%" height= "1000px">
+          <iframe id="pdfviewer" src="../statics/test.pdf" width= "100%" height= "1000px" plugins></iframe>
         </div>
       </div>
       <div id="sidebarright">
@@ -44,26 +43,9 @@
           <textarea class="form-control" rows="5" id="notes">{{papers[currentPaper].notes}}</textarea>
         </div>
       </div>
-
-      <div id="filepicker-outer" ng-show="filepicker.show">
-        <div id="filepicker-inner">
-          <h2>Pick save directory</h2>
-          <div ng-show="filepicker.error">{{filepicker.errorMsg}}</div>
-          Current directory: <span ng-repeat="dir in filepicker.splitCurrDir() track by $index" ng-click="splitCurrDirClick($index)">{{dir}}/</span>
-          <div ng-repeat="dir in filepicker.dirs track by $index" ng-click="dirClick(dir)"><i class="fa fa-folder"></i> {{dir}}</div>
-          <div ng-repeat="file in filepicker.files track by $index" ng-click="fileClick(file)"><i class="fa fa-file"></i> {{file}}</div>
-          <div id="filepicker-close" ng-click="filepicker.show=false"><i class="fa fa-window-close fa-3x"></i></div>
-        </div>
-      </div>
     </div>
 
-
-
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.js"></script>
-    <script type="text/javascript" src="static/js/client.js"></script>
+    <script type="text/javascript" src="../statics/js/client.js"></script>
   </body>
 </html>
