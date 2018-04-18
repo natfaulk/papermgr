@@ -11,6 +11,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="../statics/css/index.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -42,6 +43,14 @@
           <label for="notes">Notes:</label>
           <textarea class="form-control" rows="5" id="notes">{{papers[currentPaper].notes}}</textarea>
         </div>
+        <h2>Tags:</h2>
+        <div ng-repeat="tag in papers[currentPaper].tags track by $index">{{tag}} <i class="fa fa-close" ng-click="removetag(tag)"></i></div>
+        <form ng-submit="addtag()">
+          <div class="form-group">
+            <label for="tags">New tag:</label>
+            <input class="form-control" ng-model="newTag" id="tags" placeholder="Press enter to add">
+          </div>
+        </form>
       </div>
     </div>
 
