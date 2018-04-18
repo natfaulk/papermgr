@@ -2,6 +2,7 @@ const fs = require('fs')
 const path = require('path')
 
 const SAVE_FILE = path.join('savefiles', 'papers.json')
+const AUTO_SAVE_TIMEOUT = 10 * 1000 // in ms
 
 var myapp = angular.module('paperMgr', [])
 myapp.controller('topCtrl', ['$scope', '$http', function($s, $http) {
@@ -45,8 +46,16 @@ myapp.controller('topCtrl', ['$scope', '$http', function($s, $http) {
     fs.writeFile(SAVE_FILE, JSON.stringify($s.papers), 'utf8', function (err) {
       if (err) console.log(err);
   
-      // console.log("The file was saved!");
+      console.log("The file was saved!");
     })
+  }
+
+  let onChangeTimeout;
+  $s.saveFileTimeout = () => {
+    clearTimeout(onChangeTimeout) // effectively reset timeout if changed again
+    onChangeTimeout = setTimeout(() => {
+      $s.saveFileToDisk()
+    }, AUTO_SAVE_TIMEOUT)
   }
 
   $s.getSaveFile()

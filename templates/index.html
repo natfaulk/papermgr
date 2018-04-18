@@ -41,7 +41,7 @@
         <h1>Notes:</h1>
         <div class="form-group">
           <label for="notes">Notes:</label>
-          <textarea class="form-control" rows="5" id="notes">{{papers[currentPaper].notes}}</textarea>
+          <textarea ng-blur="saveFileToDisk()" ng-change="saveFileTimeout()" ng-model="papers[currentPaper].notes" class="form-control" rows="5" id="notes"></textarea>
         </div>
         <h2>Tags:</h2>
         <div ng-repeat="tag in papers[currentPaper].tags track by $index">{{tag}} <i class="fa fa-close" ng-click="removetag(tag)"></i></div>
