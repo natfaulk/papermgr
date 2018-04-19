@@ -93,3 +93,11 @@ div#filepicker-close {
   top: 110px;
   right: 110px;
 }
+
+.fa-check-circle {
+  color: green;
+}
+
+.fa-times-circle {
+  color: red;
+}

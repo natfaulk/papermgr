@@ -24,7 +24,11 @@
     <div id="wrapper" ng-app="paperMgr" ng-controller="topCtrl">
       <div id="sidebarleft">
         <h1>Papers:</h1>
-        <div ng-repeat="paper in papers track by $index" class="sidebarpaper" ng-click="sidebar($index)">{{paper.title}}</div>
+        <div ng-repeat="paper in papers track by $index" class="sidebarpaper" ng-click="sidebar($index)">
+          {{paper.title}}
+          <i class="fa fa-check-circle" ng-show="paper.read"></i>
+          <i class="fa fa-times-circle" ng-hide="paper.read"></i>
+        </div>
         <!-- <div id="sidebaraddpaper" ng-click="showFilePicker()">
           Add paper
           <input type="file" id="fileLoader" name="files" title="Load File" />
@@ -51,6 +55,8 @@
             <input class="form-control" ng-model="newTag" id="tags" placeholder="Press enter to add">
           </div>
         </form>
+        <input type="button" ng-hide="papers[currentPaper].read" ng-click="papers[currentPaper].read=true;saveFileToDisk()" class="btn btn-success" value="Mark as read">
+        <input type="button" ng-show="papers[currentPaper].read" ng-click="papers[currentPaper].read=false;saveFileToDisk()" class="btn btn-danger" value="Mark as unread">
       </div>
     </div>
 
