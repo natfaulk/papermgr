@@ -58,6 +58,12 @@
         </form>
         <input type="button" ng-hide="papers[currentPaper].read" ng-click="papers[currentPaper].read=true;saveFileToDisk()" class="btn btn-success" value="Mark as read">
         <input type="button" ng-show="papers[currentPaper].read" ng-click="papers[currentPaper].read=false;saveFileToDisk()" class="btn btn-danger" value="Mark as unread">
+        <div>Title: {{papers[currentPaper].title}}</div>
+        <div ng-repeat="author in papers[currentPaper].authors track by $index">Author: {{author}}</div>
+        <div>Year: {{papers[currentPaper].year}}</div>
+        <div>Journal Name: {{papers[currentPaper].journalName}}</div>
+        <div>Publisher: {{papers[currentPaper].publisher}}</div>
+        <div>ISBN: {{papers[currentPaper].isbn}}</div>
       </div>
 
       <div id="filepicker-outer" ng-show='showAddPaper'>
