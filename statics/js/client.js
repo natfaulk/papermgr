@@ -1,27 +1,40 @@
 const fs = require('fs')
+const fse = require('fs-extra') // for copying files
 const path = require('path')
 const {dialog} = require('electron').remote
 const loadRis = require('./loadRis.js')
 
-const SAVE_FILE = path.join('savefiles', 'papers.json')
+let SETTINGS_FILE = path.join(__dirname, '../../settings.json')
 const AUTO_SAVE_TIMEOUT = 10 * 1000 // in ms
 
 var myapp = angular.module('paperMgr', [])
 myapp.controller('topCtrl', ['$scope', '$http', function($s, $http) {
-  $s.papers = []
+  $s.loadSettings = () => {
+    fs.readFile(SETTINGS_FILE, 'utf8', function (err, data) {
+      if (err) throw err; // we'll not consider error handling for now
+      $s.settings = JSON.parse(data)
+      console.log($s.settings)
+      $s.data_file = path.join($s.settings.data_path, 'papers.json')
 
+      $s.getSaveFile()
+    })
+  }
+
+  
+  $s.papers = []
   $s.currentPaper = 0
+  $s.loadSettings()
 
   $s.sidebar = (n) => {
     $s.currentPaper = n
     let o = document.getElementById('pdfviewer')
     let c = o.cloneNode(true)
-    c.setAttribute('src', $s.papers[n].path)
+    c.setAttribute('src', path.join($s.settings.pdf_path, $s.papers[n].path))
     o.parentNode.replaceChild(c, o)
   }
 
   $s.getSaveFile = () => {
-    fs.readFile(SAVE_FILE, 'utf8', function (err, data) {
+    fs.readFile($s.data_file, 'utf8', function (err, data) {
       if (err) throw err; // we'll not consider error handling for now
       $s.papers = JSON.parse(data)
       console.log($s.papers)
@@ -45,7 +58,7 @@ myapp.controller('topCtrl', ['$scope', '$http', function($s, $http) {
   }
 
   $s.saveFileToDisk = () => {
-    fs.writeFile(SAVE_FILE, JSON.stringify($s.papers), 'utf8', function (err) {
+    fs.writeFile($s.data_file, JSON.stringify($s.papers), 'utf8', function (err) {
       if (err) console.log(err);
   
       console.log("The file was saved!");
@@ -78,15 +91,18 @@ myapp.controller('topCtrl', ['$scope', '$http', function($s, $http) {
   
   $s.addPaper = () => {
     if ($s.risFile != '' && $s.pdfFile != '') {
-      $s.addPaperDetails.path = $s.pdfFile
-      $s.papers.push($s.addPaperDetails)
-      $s.addPaperDetails = {}
-      $s.risFile = ''
-      $s.pdfFile = ''
-      $s.showAddPaper = false
+      $s.addPaperDetails.path = path.basename($s.pdfFile)
+      fse.copy($s.pdfFile, path.join($s.settings.pdf_path, $s.addPaperDetails.path), err => {
+        if (err) return console.error(err)
+        console.log('Pdf copied!')
+        $s.papers.push($s.addPaperDetails)
+        $s.addPaperDetails = {}
+        $s.risFile = ''
+        $s.pdfFile = ''
+        $s.showAddPaper = false
+        $s.saveFileToDisk()
+        $s.$apply()
+      })
     }
   }
-
-
-  $s.getSaveFile()
 }])

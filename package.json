@@ -9,7 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "angular": "^1.6.10"
+    "angular": "^1.6.10",
+    "fs-extra": "^5.0.0"
   },
   "devDependencies": {
     "electron": "^1.8.4",
