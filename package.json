@@ -8,7 +8,9 @@
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "angular": "^1.6.10"
+  },
   "devDependencies": {
     "electron": "^1.8.4",
     "standard": "^11.0.0"

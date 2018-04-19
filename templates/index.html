@@ -33,6 +33,7 @@
           Add paper
           <input type="file" id="fileLoader" name="files" title="Load File" />
         </div> -->
+        <div id="sidebaraddpaper" ng-click="showAddPaper=true">Add paper</div>
       </div>
       <div id="maincontent">
         <div class="container1">
@@ -58,9 +59,44 @@
         <input type="button" ng-hide="papers[currentPaper].read" ng-click="papers[currentPaper].read=true;saveFileToDisk()" class="btn btn-success" value="Mark as read">
         <input type="button" ng-show="papers[currentPaper].read" ng-click="papers[currentPaper].read=false;saveFileToDisk()" class="btn btn-danger" value="Mark as unread">
       </div>
-    </div>
 
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.js"></script>
-    <script type="text/javascript" src="../statics/js/client.js"></script>
+      <div id="filepicker-outer" ng-show='showAddPaper'>
+        <div id="filepicker-inner">
+          <h2>Choose .RIS file</h2>
+          <div class="form-group">
+            <label for="risfile">RIS file:</label>
+            <input class="form-control" ng-model="risFile" id="risfile">
+          </div>
+          <input type="button" class="btn" ng-click="selectRisFile()" value="Pick file">
+          
+          <div>Title: {{addPaperDetails.title}}</div>
+          <div ng-repeat="author in addPaperDetails.authors track by $index">Author: {{author}}</div>
+          <div>Year: {{addPaperDetails.year}}</div>
+          <div>Journal Name: {{addPaperDetails.journalName}}</div>
+          <div>Publisher: {{addPaperDetails.publisher}}</div>
+          <div>ISBN: {{addPaperDetails.isbn}}</div>
+
+          
+          <h2>Choose PDF file</h2>
+          <div class="form-group">
+            <label for="pdffile">PDF file:</label>
+            <input class="form-control" ng-model="pdfFile" id="pdffile">
+          </div>
+          <input type="button" class="btn" ng-click="selectPdfFile()" value="Pick file">
+          <input type="button" class="btn" ng-click="addPaper()" value="Add paper">
+          
+          <!-- <div ng-show="filepicker.error">{{filepicker.errorMsg}}</div> -->
+          <!-- Current directory: <span ng-repeat="dir in filepicker.splitCurrDir() track by $index" ng-click="splitCurrDirClick($index)">{{dir}}/</span> -->
+          <!-- <div ng-repeat="dir in filepicker.dirs track by $index" ng-click="dirClick(dir)"><i class="fa fa-folder"></i> {{dir}}</div> -->
+          <!-- <div ng-repeat="file in filepicker.files track by $index" ng-click="fileClick(file)"><i class="fa fa-file"></i> {{file}}</div> -->
+          <div id="filepicker-close" ng-click="showAddPaper=false"><i class="fa fa-window-close fa-3x"></i></div>
+        </div>
+      </div>
+  
+    </div>
+    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.js"></script> -->
+    <!-- <script type="text/javascript" src="../statics/js/client.js"></script> -->
+    <script>require('angular')</script>
+    <script>require('../statics/js/client.js')</script>
   </body>
 </html>
