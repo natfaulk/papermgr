@@ -92,9 +92,8 @@ myapp.controller('topCtrl', ['$scope', '$http', function($s, $http) {
   $s.addPaper = () => {
     if ($s.risFile != '' && $s.pdfFile != '') {
       $s.addPaperDetails.path = path.basename($s.pdfFile)
-      fse.copy($s.pdfFile, path.join($s.settings.pdf_path, $s.addPaperDetails.path), err => {
-        if (err) return console.error(err)
-        console.log('Pdf copied!')
+      
+      function addPaper() {
         $s.papers.push($s.addPaperDetails)
         $s.addPaperDetails = {}
         $s.risFile = ''
@@ -102,6 +101,13 @@ myapp.controller('topCtrl', ['$scope', '$http', function($s, $http) {
         $s.showAddPaper = false
         $s.saveFileToDisk()
         $s.$apply()
+      }
+      // in case pdf already in pdf folder
+      if (path.dirname($s.pdfFile) == $s.settings.pdf_path) addPaper()
+      fse.copy($s.pdfFile, path.join($s.settings.pdf_path, $s.addPaperDetails.path), err => {
+        if (err) return console.error(err)
+        console.log('Pdf copied!')
+        addPaper()
       })
     }
   }
