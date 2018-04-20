@@ -1,15 +1,17 @@
 html {
   height: 100vh;
+  background-color: #397367;
 }
 body, div#wrapper, div#maincontent {
   min-height: 100vh;
 }
 
 div#sidebarleft {
-  border-style: solid;
-  border-width: 5px;
-  border-color: black;
-  background-color: cyan;
+  border-style: none;
+  border-right-style: solid;
+  border-right-width: 5px;
+  border-color: #29339b;
+  background-color: #74a4bc;
 
   height: 100%;
   width: 300px;
@@ -21,10 +23,23 @@ div#sidebarleft {
   /* margin-left: -200px; */
 }
 
-div#sidebarright {
+div#sidebarleft h1{
   border-style: solid;
-  border-width: 5px;
-  border-color: black;
+  border-width: 0;
+  border-bottom-width: 2px;
+  border-color: #29339b; 
+  padding-bottom: 0.2em;
+  margin-bottom: 0;
+}
+
+
+div#sidebarright {
+  padding: 10px;
+  border-style: none;
+  background-color: #74a4bc;
+  border-left-style: solid;
+  border-left-width: 5px;
+  border-color: #29339b;
 
   height: 100%;
   width: 300px;
@@ -40,23 +55,27 @@ div#maincontent {
 }
 
 div#wrapper {
-  background-color: olive;
+  /* background-color: #74a4bc; */
   padding-left: 300px;
   padding-right: 300px;
   min-height: 100%;
 }
 
 div.container1 {
-  background-color: red;
+  background-color: #397367;
   min-height: 100vh;
 }
 
+div.container1 h1{
+  margin: 10px;
+}
+
 div.sidebarpaper {
-  background-color: gray;
+  background-color: #706c61;
   border-style: solid;
   border-width: 0;
-  border-bottom-width: 5px;
-  border-color: black; 
+  border-bottom-width: 2px;
+  border-color: #29339b; 
 }
 
 div#sidebaraddpaper {
@@ -66,7 +85,15 @@ div#sidebaraddpaper {
   left: 0;
   width: inherit;
   height: 50px;
-  background-color: chartreuse;
+  background-color: #fe4e00;
+  border-right-style: solid;
+  border-right-width: 5px;
+  border-top-style: solid;
+  border-top-width: 5px;
+  border-color: #29339b;
+  text-align: center;
+  font-size: 2em;
+  cursor: pointer;
 }
 
 div#filepicker-outer {
@@ -83,8 +110,11 @@ div#filepicker-inner {
   /* margin: 100px; */
   width: 100%;
   height: 100%;
-  background-color: darkorchid;
-  overflow: scroll;
+  background-color: #74a4bc;
+  /* overflow: scroll; */
+  border-width: 5px;
+  border-style: solid;
+  border-color: #29339b;
 }
 
 div#filepicker-close {
@@ -92,6 +122,7 @@ div#filepicker-close {
   z-index: 4;
   top: 110px;
   right: 110px;
+  cursor: pointer;
 }
 
 .fa-check-circle {
@@ -101,3 +132,10 @@ div#filepicker-close {
 .fa-times-circle {
   color: red;
 }
+/* 
+input#addPaperBtn {
+  position: fixed;
+  z-index: 4;
+  bottom: 110px;
+  right: 110px;
+} */
