@@ -74,7 +74,7 @@ myapp.controller('topCtrl', ['$scope', '$http', function($s, $http) {
   }
 
   $s.selectRisFile = () => {
-    $s.risFile = dialog.showOpenDialog({properties: ['openFile']})
+    $s.risFile = dialog.showOpenDialog({defaultPath: $s.settings.default_ris_path, properties: ['openFile']})
     if ($s.risFile !== undefined) {
       let t = []
       loadRis.fromFile($s.risFile[0], t, () => {
@@ -86,7 +86,7 @@ myapp.controller('topCtrl', ['$scope', '$http', function($s, $http) {
   }
   
   $s.selectPdfFile = () => {
-    $s.pdfFile = dialog.showOpenDialog({properties: ['openFile']})[0]
+    $s.pdfFile = dialog.showOpenDialog({defaultPath: $s.settings.pdf_path, properties: ['openFile']})[0]
   }
   
   $s.addPaper = () => {

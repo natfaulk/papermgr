@@ -1,4 +1,5 @@
 {
   "pdf_path": "/Users/me/Documents/litReview/papers",
-  "data_path": "/Users/me/Documents/litReview/papermgr_sav"
+  "data_path": "/Users/me/Documents/litReview/papermgr_sav",
+  "default_ris_path": "/Users/me/Downloads"
 }
