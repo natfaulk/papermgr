@@ -21,7 +21,7 @@ The software is written in JS, uses AngularJS for templating and uses electron t
 ## Features to be implemented
 - Make the UI pretty
 - Sanitise iputs and proper error checking, especially on file loading
-- ~~Auto suggest tags when typing (eg so dont get WiFi anf wifi and wi-fi as 3 seperate tags)~~
+- ~~Auto suggest tags when typing (eg so dont get WiFi and wifi and wi-fi as 3 seperate tags)~~
 - Sort papers by date added, tag, date read, author etc
 - Categorise papers in sidebar
 - If no settings file found, prompt for directories to be used
