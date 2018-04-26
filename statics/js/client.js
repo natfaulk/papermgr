@@ -24,6 +24,19 @@ myapp.controller('topCtrl', ['$scope', '$http', function($s, $http) {
   $s.papers = []
   $s.currentPaper = 0
   $s.loadSettings()
+  
+  $s.tagCache = []
+  // horrible jquery... Need to do it in an angular way :/
+  $('#tags').typeahead({source: $s.tagCache})
+
+  $s.regenTagCache = () => {
+    $s.papers.forEach((p) => {
+      if (p.tags) p.tags.forEach((t) => {
+        if (!$s.tagCache.includes(t)) $s.tagCache.push(t)
+      })
+    })
+    // console.log($s.tagCache)
+  }
 
   $s.sidebar = (n) => {
     $s.currentPaper = n
@@ -39,6 +52,7 @@ myapp.controller('topCtrl', ['$scope', '$http', function($s, $http) {
       $s.papers = JSON.parse(data)
       console.log($s.papers)
       $s.sidebar($s.currentPaper)
+      $s.regenTagCache()
       $s.$apply()
     })
   }
