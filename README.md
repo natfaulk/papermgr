@@ -16,12 +16,14 @@ The software is written in JS, uses AngularJS for templating and uses electron t
 - Add pdf files and citation in RefMan format (.ris file, easy to download from google scholar)
 - Display PDF in central pane, can add notes and tags and set whether paper read or not in right pane
 - saves to json file
+- autocomplete tags
 
 ## Features to be implemented
 - Make the UI pretty
 - Sanitise iputs and proper error checking, especially on file loading
-- Auto suggest tags when typing (eg so dont get WiFi anf wifi and wi-fi as 3 seperate tags)
+- ~~Auto suggest tags when typing (eg so dont get WiFi anf wifi and wi-fi as 3 seperate tags)~~
 - Sort papers by date added, tag, date read, author etc
+- Categorise papers in sidebar
 - If no settings file found, prompt for directories to be used
 - Get references from papers and interactively show which papers refernce which
 - Scrape info automatically and not need to download citation
