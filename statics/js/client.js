@@ -24,7 +24,32 @@ myapp.controller('topCtrl', ['$scope', '$http', function($s, $http) {
   $s.papers = []
   $s.currentPaper = 0
   $s.loadSettings()
-  
+
+  $s.hlKey = ''
+  $s.hlVal = ''
+  $s.shouldHl = (_paper, _key, _val) => {
+    if (_paper == $s.papers[$s.currentPaper]) return true
+    if (_key == '') return false
+    if (_key == 'authors') {
+      if (_paper.authors) return _paper.authors.includes(_val)
+      else return false
+    }
+    return _paper[_key].toLowerCase() == _val.toLowerCase()
+  }
+
+  $s.setHlAuthors = (_author) => {
+    console.log(_author)
+    // hacky workaround as authors would not show
+    $s.hlKey = 'authors'
+    $s.hlVal = _author
+  }
+
+  $s.resetHlAuthors = (_author) => {
+    // hacky workaround as authors would not clear
+    $s.hlKey = ''
+    $s.hlVal = ''
+  }
+    
   $s.tagCache = []
   // horrible jquery... Need to do it in an angular way :/
   $('#tags').typeahead({source: $s.tagCache})

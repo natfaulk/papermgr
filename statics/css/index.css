@@ -78,6 +78,10 @@ div.sidebarpaper {
   border-color: #29339b; 
 }
 
+div#sidebarleft .highlight {
+  background-color: #fe4e00; 
+}
+
 div#sidebaraddpaper {
   position: fixed;
   z-index: 2;
