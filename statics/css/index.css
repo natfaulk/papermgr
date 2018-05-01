@@ -19,7 +19,8 @@ div#sidebarleft {
   z-index: 2;
   top: 0;
   left: 0;
-
+  overflow: scroll;
+  padding-bottom: 60px;
   /* margin-left: -200px; */
 }
 
