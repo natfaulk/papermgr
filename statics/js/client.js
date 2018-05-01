@@ -84,7 +84,7 @@ myapp.controller('topCtrl', ['$scope', '$http', function($s, $http) {
 
   $s.addtag = () => {
     $s.papers[$s.currentPaper].tags.push($s.newTag)
-    $s.tagCache.push($s.newTag)    
+    if (!$s.tagCache.includes($s.newTag)) $s.tagCache.push($s.newTag)    
     $s.newTag = ''
     $s.saveFileToDisk()
   }
