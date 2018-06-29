@@ -51,6 +51,7 @@ myapp.controller('topCtrl', ['$scope', '$http', function($s, $http) {
   }
     
   $s.tagCache = []
+  $s.tagSidebarShow = {'all': true}
   // horrible jquery... Need to do it in an angular way :/
   $('#tags').typeahead({source: $s.tagCache})
 
@@ -93,7 +94,8 @@ myapp.controller('topCtrl', ['$scope', '$http', function($s, $http) {
     let index = $s.papers[$s.currentPaper].tags.indexOf(tag)
     if (index !== -1) {
       $s.papers[$s.currentPaper].tags.splice(index, 1)
-      $s.saveFileToDisk()      
+      $s.saveFileToDisk()
+      $s.$apply() 
     }
   }
 

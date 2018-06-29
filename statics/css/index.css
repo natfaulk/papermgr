@@ -79,6 +79,14 @@ div.sidebarpaper {
   border-color: #29339b; 
 }
 
+div.sidebar-tag {
+  background-color: #397367;
+  border-style: solid;
+  border-width: 0;
+  border-bottom-width: 2px;
+  border-color: #29339b; 
+}
+
 div#sidebarleft .highlight {
   background-color: #fe4e00; 
 }

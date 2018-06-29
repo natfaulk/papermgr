@@ -24,10 +24,23 @@
     <div id="wrapper" ng-app="paperMgr" ng-controller="topCtrl">
       <div id="sidebarleft">
         <h1>Papers:</h1>
-        <div ng-repeat="paper in papers track by $index" class="sidebarpaper" ng-click="sidebar($index)" ng-class="{'highlight': shouldHl(paper, hlKey, hlVal)}">
-          {{paper.title}}
-          <i class="fa fa-check-circle" ng-show="paper.read"></i>
-          <i class="fa fa-times-circle" ng-hide="paper.read"></i>
+        <div class="sidebar-tag" ng-click="tagSidebarShow['all']=!tagSidebarShow['all']">All</div>
+        <div ng-show="tagSidebarShow['all']">
+          <div ng-repeat="paper in papers track by $index" class="sidebarpaper" ng-click="sidebar($index)" ng-class="{'highlight': shouldHl(paper, hlKey, hlVal)}">
+            {{paper.title}}
+            <i class="fa fa-check-circle" ng-show="paper.read"></i>
+            <i class="fa fa-times-circle" ng-hide="paper.read"></i>
+          </div>
+        </div>
+        <div ng-repeat="tag in tagCache track by $index">
+          <div class="sidebar-tag" ng-click="tagSidebarShow[tag]=!tagSidebarShow[tag]">{{tag}}</div>
+          <div ng-show="tagSidebarShow[tag]">
+            <div ng-repeat="paper in papers track by $index" ng-show="paper.tags.indexOf(tag) > -1" class="sidebarpaper" ng-click="sidebar($index)" ng-class="{'highlight': shouldHl(paper, hlKey, hlVal)}">
+              {{paper.title}}
+              <i class="fa fa-check-circle" ng-show="paper.read"></i>
+              <i class="fa fa-times-circle" ng-hide="paper.read"></i>
+            </div>
+          </div>
         </div>
         <!-- <div id="sidebaraddpaper" ng-click="showFilePicker()">
           Add paper
