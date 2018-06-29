@@ -23,7 +23,7 @@ The software is written in JS, uses AngularJS for templating and uses electron t
 - Sanitise iputs and proper error checking, especially on file loading
 - ~~Auto suggest tags when typing (eg so dont get WiFi and wifi and wi-fi as 3 seperate tags)~~
 - Sort papers by date added, tag, date read, author etc
-- Categorise papers in sidebar
+- ~~Categorise papers in sidebar~~
 - If no settings file found, prompt for directories to be used
 - Get references from papers and interactively show which papers refernce which
 - Scrape info automatically and not need to download citation
