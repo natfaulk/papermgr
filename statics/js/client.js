@@ -56,7 +56,7 @@ myapp.controller('topCtrl', ['$scope', '$http', function($s, $http) {
   $('#tags').typeahead({source: $s.tagCache})
 
   $s.regenTagCache = () => {
-    $s.tagCache = []
+    $s.tagCache.splice(0,$s.tagCache.length)
     $s.papers.forEach((p) => {
       if (p.tags) p.tags.forEach((t) => {
         if (!$s.tagCache.includes(t)) $s.tagCache.push(t)
