@@ -61,6 +61,10 @@
           <label for="notes">Notes:</label>
           <textarea ng-blur="saveFileToDisk()" ng-change="saveFileTimeout()" ng-model="papers[currentPaper].notes" class="form-control" rows="5" id="notes"></textarea>
         </div>
+        <input ng-show="papers[currentPaper].unlocked" class="form-control" ng-model="papers[currentPaper].easyname" ng-change="saveFileTimeout()" ng-blur="saveFileToDisk()" >
+        <div ng-hide="papers[currentPaper].unlocked">BibTex name: {{papers[currentPaper].easyname}}</div>
+        <input type="button" ng-hide="papers[currentPaper].unlocked" class="btn" value="Unlock editing name" ng-click="papers[currentPaper].unlocked=true">
+        <input type="button" ng-show="papers[currentPaper].unlocked" class="btn" value="Lock editing name" ng-click="papers[currentPaper].unlocked=false"> 
         <h2>Tags:</h2>
         <div ng-repeat="tag in papers[currentPaper].tags track by $index">{{tag}} <i class="fa fa-close" ng-click="removetag(tag)"></i></div>
         <form ng-submit="addtag()">

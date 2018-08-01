@@ -3,6 +3,7 @@ const fse = require('fs-extra') // for copying files
 const path = require('path')
 const {dialog} = require('electron').remote
 const loadRis = require('./loadRis.js')
+const Bibtex = require('./bibtex')
 
 let SETTINGS_FILE = path.join(__dirname, '../../settings.json')
 const AUTO_SAVE_TIMEOUT = 10 * 1000 // in ms
@@ -77,6 +78,9 @@ myapp.controller('topCtrl', ['$scope', '$http', function($s, $http) {
     fs.readFile($s.data_file, 'utf8', function (err, data) {
       if (err) throw err; // we'll not consider error handling for now
       $s.papers = JSON.parse(data)
+      $s.papers.forEach(element => {
+        element.unlocked = false
+      })
       console.log($s.papers)
       $s.sidebar($s.currentPaper)
       $s.regenTagCache()
@@ -107,6 +111,8 @@ myapp.controller('topCtrl', ['$scope', '$http', function($s, $http) {
   
       console.log("The file was saved!");
     })
+
+    Bibtex.export($s.papers, path.join($s.settings.bib_path, 'test.bib'))
   }
 
   let onChangeTimeout;
