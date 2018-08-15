@@ -17,6 +17,8 @@ The software is written in JS, uses AngularJS for templating and uses electron t
 - Display PDF in central pane, can add notes and tags and set whether paper read or not in right pane
 - saves to json file
 - autocomplete tags
+- view papers by tag in sidebar
+- filter papers by title in sidebar
 
 ## Features to be implemented
 - Make the UI pretty

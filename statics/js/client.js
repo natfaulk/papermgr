@@ -25,6 +25,7 @@ myapp.controller('topCtrl', ['$scope', '$http', function($s, $http) {
   $s.papers = []
   $s.currentPaper = 0
   $s.loadSettings()
+  $s.filter = ''
 
   $s.hlKey = ''
   $s.hlVal = ''
