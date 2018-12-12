@@ -37,6 +37,16 @@ module.exports = {
   organization={${element.publisher}}
 }`
         )
+      
+      } else if (element.paperType == 'BOOK') {
+        out.write(
+`@book{${easyname},
+  title={${element.title}},
+  author={${authors}},
+  publisher={${element.publisher}},
+  year={${element.year}}
+}`
+        )
       } else console.log('unknown article type')
 
     })

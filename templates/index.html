@@ -98,6 +98,7 @@
         <div ng-mouseenter="hlKey='journalName';hlVal=papers[currentPaper].journalName" ng-mouseleave="hlKey='';hlVal=''">Journal Name: {{papers[currentPaper].journalName}}</div>
         <div ng-mouseenter="hlKey='publisher';hlVal=papers[currentPaper].publisher" ng-mouseleave="hlKey='';hlVal=''">Publisher: {{papers[currentPaper].publisher}}</div>
         <div>ISBN: {{papers[currentPaper].isbn}}</div>
+        <div>Filename: {{papers[currentPaper].path}}</div>
       </div>
 
       <div id="filepicker-outer" ng-show='showAddPaper'>
